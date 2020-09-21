@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">VocabularyKt</string>
+    <string name="russian">russian</string>
+    <string name="english">english</string>
+</resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+
+    <EditText
+        android:hint="Word in english"
+        android:id="@+id/add_english_word"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content" >
+    </EditText>
+
+
+
+    <EditText
+        android:id="@+id/add_translate"
+        android:hint="Word in russian"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content" >
+    </EditText>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        >
+        <ImageButton
+            android:backgroundTint="#FFFFFF"
+            android:src="@drawable/baseline_add_circle_black_36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_word"
+            android:layout_marginRight="100dp">
+
+        </ImageButton>
+
+        <ImageButton
+            android:backgroundTint="#FFFFFF"
+            android:src="@drawable/baseline_cancel_black_36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cansel_adding">
+        </ImageButton>
+    </LinearLayout>
+
+</LinearLayout>
