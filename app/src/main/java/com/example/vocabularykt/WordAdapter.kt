@@ -27,8 +27,8 @@ class WordAdapter(context: Context, private var data: List<*>) :
         val word = data[position] as Word
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = inflater.inflate(R.layout.word, parent, false)
-        (view.findViewById<View>(R.id.english_word) as TextView).text = word.getEnglish()
-        (view.findViewById<View>(R.id.russian_word) as TextView).text = word.getRussian()
+        (view.findViewById<View>(R.id.english_word) as TextView).text = word.english
+        (view.findViewById<View>(R.id.russian_word) as TextView).text = word.russian
         return view
     }
 
