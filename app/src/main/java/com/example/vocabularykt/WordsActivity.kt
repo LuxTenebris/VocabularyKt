@@ -1,10 +1,12 @@
 package com.example.vocabularykt
 
-import android.R.attr.name
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.AdapterView.OnItemClickListener
+import android.view.ContextMenu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView.AdapterContextMenuInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.ktx.firestore
@@ -14,13 +16,15 @@ import java.util.*
 
 
 class WordsActivity : AppCompatActivity() {
+
+    private val words: ArrayList<Word> = ArrayList<Word>()
+    private val db = Firebase.firestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_words)
 
-        val db = Firebase.firestore
-
-        val words: ArrayList<Word> = ArrayList<Word>()
+        registerForContextMenu(words_list)
 
         db.collection("words")
             .get()
@@ -43,11 +47,37 @@ class WordsActivity : AppCompatActivity() {
                 Log.w("get_word", "Error getting documents.", exception)
             }
 
-        val itemListener =
-            OnItemClickListener { parent, v, position, id -> // получаем выбранный пункт
+    }
 
-            }
-        words_list.onItemClickListener = itemListener
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        var inflater : MenuInflater = menuInflater
+        return inflater.inflate(R.menu.word_list_menu, menu)
+    }
 
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val info = item.menuInfo as AdapterContextMenuInfo
+
+        when(item.itemId){
+            R.id.delete_word -> db.collection("words").document(words[info.id.toInt()].id)
+                .delete()
+                .addOnSuccessListener {
+                    Log.d("DELETE", "DocumentSnapshot successfully deleted!")
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
+                .addOnFailureListener { e -> Log.w("DELETE", "Error deleting document", e) }
+
+            R.id.edit_word -> Toast.makeText(this, "Edit", Toast.LENGTH_SHORT).show()
+
+            R.id.add_to_favorite -> Toast.makeText(this, "Favorite", Toast.LENGTH_SHORT).show()
+        }
+        return super.onContextItemSelected(item)
     }
 }
