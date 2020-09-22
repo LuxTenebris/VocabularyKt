@@ -1,13 +1,17 @@
 package com.example.vocabularykt
 
+import android.R.attr.name
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_words.*
 import java.util.*
+
 
 class WordsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +42,12 @@ class WordsActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.w("get_word", "Error getting documents.", exception)
             }
+
+        val itemListener =
+            OnItemClickListener { parent, v, position, id -> // получаем выбранный пункт
+
+            }
+        words_list.onItemClickListener = itemListener
 
     }
 }
