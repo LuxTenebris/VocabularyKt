@@ -2,6 +2,7 @@ package com.example.vocabularykt
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -22,8 +23,10 @@ class WordsActivity : AppCompatActivity() {
             .addOnSuccessListener { result ->
                 for (document in result) {
                     Log.d("get_word", "${document.id} => ${document.data}")
-                    words.add(Word(document.get("english") as String,
-                        document.get("russian") as String
+                    words.add(Word(
+                        document.get("english") as String,
+                        document.get("russian") as String,
+                        document.id
                     ))
                 }
 
@@ -35,7 +38,6 @@ class WordsActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.w("get_word", "Error getting documents.", exception)
             }
-
 
     }
 }
