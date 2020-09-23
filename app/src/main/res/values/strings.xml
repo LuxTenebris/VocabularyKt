@@ -2,7 +2,7 @@
     <string name="app_name">VocabularyKt</string>
     <string name="russian">russian</string>
     <string name="english">english</string>
-    <string name="add_to_favorite">Favorite</string>
+    <string name="add_to_favorite">Favourite</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
 </resources>

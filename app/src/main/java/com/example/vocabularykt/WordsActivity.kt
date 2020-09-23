@@ -87,7 +87,7 @@ class WordsActivity : AppCompatActivity() {
                 
             }
 
-            R.id.add_to_favorite -> Toast.makeText(this, "Favorite", Toast.LENGTH_SHORT).show()
+            R.id.add_to_favourite -> Toast.makeText(this, "Favourite", Toast.LENGTH_SHORT).show()
         }
         return super.onContextItemSelected(item)
     }
