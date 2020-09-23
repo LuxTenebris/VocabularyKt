@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView.AdapterContextMenuInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_words.*
@@ -74,7 +75,17 @@ class WordsActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener { e -> Log.w("DELETE", "Error deleting document", e) }
 
-            R.id.edit_word -> Toast.makeText(this, "Edit", Toast.LENGTH_SHORT).show()
+            R.id.edit_word -> {
+                val editDialog = EditDialog()
+                val bundle = Bundle()
+
+                bundle.putString("english", words[info.id.toInt()].english)
+                bundle.putString("russian", words[info.id.toInt()].russian)
+                bundle.putString("id", words[info.id.toInt()].id)
+                editDialog.arguments = bundle
+                editDialog.show(supportFragmentManager, "editDialog")
+                
+            }
 
             R.id.add_to_favorite -> Toast.makeText(this, "Favorite", Toast.LENGTH_SHORT).show()
         }
